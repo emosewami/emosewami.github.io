@@ -1,11 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Light/Dark Mode Demo</title>
+    <title>Josh Nichols | Senior WordPress Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
@@ -267,6 +267,7 @@
             width: 100%;
             height: 200px;
             overflow: hidden;
+            display: none;
         }
 
         .portfolio-image img {
@@ -347,7 +348,12 @@
 
                 <div class="summary">
                     <h2>Summary</h2>
-                    <p>For over 20 years I've been building custom websites, solving technical challenges through code. What drives me is taking a functional requirement or design concept and translating it into a dynamic, working solution. NOTE: use AI to generate this after making the others sections, make it summarize my employment/education/skills into three objectives.</p>
+                    <p>For over 20 years I've been architecting scalable WordPress solutions and building custom web applications 
+                    that solve complex technical challenges. My expertise spans smaller brochure websites, enterprise multi-tenant platforms, custom design systems, 
+                    and data-driven integrations—translating business requirements into robust, maintainable code. I specialize in 
+                    WordPress and other PHP frameworks while leveraging modern development practices including AI-assisted workflows 
+                    to deliver efficient, high-quality solutions. I also simply enjoy the satisfaction of building websites like a fun 
+                    puzzle, no matter the size.</p>
                 </div>
             </div>
             <div>
@@ -446,9 +452,11 @@
                 
                 <div class="portfolio-card">
                     <div class="portfolio-image">
+                        <a href="https://www.model1.com/inventory/">
                         <img src="https://placehold.co/350x200" alt="Model1 – Automotive Inventory Management System">
+                        </a>
                     </div>
-                    <h3>Model1 – Automotive Inventory Management System</h3>
+                    <h3><a href="https://www.model1.com/inventory/">Model1 – Automotive Inventory Management System ⇗</a></h3>
                     <p>Built robust data synchronization system handling large-scale vehicle inventory datasets with real-time updates. Implemented advanced filtering and search functionality enabling users to efficiently query complex inventory data across multiple parameters and attributes.</p>
                 </div>
                 
@@ -464,7 +472,7 @@
                     <div class="portfolio-image">
                         <img src="https://placehold.co/350x200" alt="MD Helicopters – AI-Enhanced Interactive Mapping">
                     </div>
-                    <h3>MD Helicopters – AI-Enhanced Interactive Mapping</h3>
+                    <h3><a href="https://www.mdhelicopters.com/support/parts-maintenance-support/">MD Helicopters – AI-Enhanced Interactive Mapping ⇗</a></h3>
                     <p>Leveraged AI-assisted development to rapidly deliver dynamic, data-driven mapping solution with real-time synchronization. Implemented filterable location display system integrating external data sources to provide intuitive geographic visualization of global service centers.</p>
                 </div>
                 
@@ -472,7 +480,7 @@
                     <div class="portfolio-image">
                         <img src="https://placehold.co/350x200" alt="Red Mountain Weight Loss – Geolocation-Aware Marketing Platform">
                     </div>
-                    <h3>Red Mountain Weight Loss – Geolocation-Aware Marketing Platform</h3>
+                    <h3><a href="https://www.redmountainweightloss.com/states/arizona/">Red Mountain Weight Loss – Geolocation-Aware Marketing Platform ⇗</a></h3>
                     <p>Developed sophisticated location-based WordPress solution with dynamic content delivery and personalized user experiences. Implemented geolocation detection and automated content switching to display location-specific services, pricing, and features based on user proximity to clinic locations.</p>
                 </div>
 
@@ -487,25 +495,25 @@
         
         </div>
 
-        <script>
-            function setTheme(theme) {
-                document.body.classList.remove('light-mode', 'dark-mode');
-                
-                if (theme === 'light') {
-                    document.body.classList.add('light-mode');
-                } else if (theme === 'dark') {
-                    document.body.classList.add('dark-mode');
-                }
-                // 'auto' removes both classes, allowing CSS media query to work
-            }
+    <script>
+    	function setTheme(theme) {
+            document.body.classList.remove('light-mode', 'dark-mode');
 
-            // Listen for system theme changes
-            if (window.matchMedia) {
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-                    // Update if currently in 'auto' mode
-                    // For simplicity in this demo, we'll just let the CSS handle it
-                });
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+            } else if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
             }
-        </script>
+            // 'auto' removes both classes, allowing CSS media query to work
+        }
+
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                // Update if currently in 'auto' mode
+                // For simplicity in this demo, we'll just let the CSS handle it
+            });
+        }
+    </script>
 </body>
 </html>
