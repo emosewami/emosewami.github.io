@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Light/Dark Mode Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f5f5f5;
+            --card-border: #dddddd;
+            --link-color: #006699;
+            --button-bg: #f0f0f0;
+            --button-border: #cccccc;
+            --button-hover: #e0e0e0;
+            --accent-color: #ff9900;
+        }
+
+        /* Dark mode variables */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --text-color: #e4e4e4;
+                --card-bg: #2a2a2a;
+                --card-border: #444444;
+                --link-color: #6eb3f7;
+                --button-bg: #3a3a3a;
+                --button-border: #555555;
+                --button-hover: #4a4a4a;
+                --accent-color: #ff9900;
+            }
+        }
+
+        /* Manual dark mode override */
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #e4e4e4;
+            --card-bg: #2a2a2a;
+            --card-border: #444444;
+            --link-color: #6eb3f7;
+            --button-bg: #3a3a3a;
+            --button-border: #555555;
+            --button-hover: #4a4a4a;
+            --accent-color: #ff9900;
+        }
+
+        /* Manual light mode override */
+        body.light-mode {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f5f5f5;
+            --card-border: #dddddd;
+            --link-color: #006699;
+            --button-bg: #f0f0f0;
+            --button-border: #cccccc;
+            --button-hover: #e0e0e0;
+            --accent-color: #ff9900;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.4;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+
+            font-family: "SUSE Mono", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        .utility {
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                padding: 2px 4px;
+                border: none;
+                font-size: 75%;
+            }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 0rem;
+            letter-spacing: -0.15rem;
+
+            span {
+                display: inline-block;
+                position: relative;
+                padding-left: 2.4rem;
+                padding-right: 2.4rem;
+                opacity: 0.85;
+
+                &:before {
+                    position: absolute;
+                    content: "/*";
+                    left: 0;
+                    color: var(--accent-color);
+                }
+
+                &:after {
+                    position: absolute;
+                    content: "*/";
+                    right: 0;
+                    color: var(--accent-color);
+                }
+            }
+        }
+
+        h2 {
+            position: relative;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+
+            &:before {
+                content: "//";
+                /*font-style: italic;*/
+                opacity: 0.75;
+                position: absolute;
+                left: 0;
+                color: var(--accent-color);
+            }
+        }
+
+       .contact-list {
+           list-style-type: none;
+           margin: 1rem 0;
+       }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-list i {
+            width: 20px;
+            margin-right: 10px;
+            text-align: center;
+            color: var(--link-color);
+        }
+
+        .contact-list a {
+            display: inline-block;
+        }
+
+        .content {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .section-education-skills {
+            max-width: 30%;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 0px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+
+            ul {
+                margin-top: 1rem;
+                padding-left: 2rem;
+
+                li {
+                    margin-bottom: 0.5rem;
+                }
+            }
+
+            p {
+                margin-bottom: 1rem;
+            }
+
+            ul, p {
+                max-width: 768px;
+            }
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            font-family: "SUSE Mono", sans-serif;
+            background-color: var(--button-bg);
+            color: var(--text-color);
+            border: 1px solid var(--button-border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+        }
+
+        .toggle-section {
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Portfolio Grid Styles */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .portfolio-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 0px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portfolio-card:hover {
+            /*transform: translateY(-5px);*/
+            /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);*/
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-card:hover .portfolio-image img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-card h3 {
+            padding: 1rem 1rem 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .portfolio-card p {
+            padding: 0 1rem 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="utility">
+            <div class="toggle-section">
+                <button onclick="setTheme('light')" title="Light Mode"><i class="fas fa-sun"></i></button>
+                <button onclick="setTheme('dark')" title="Dark Mode"><i class="fas fa-moon"></i></button>
+                <button onclick="setTheme('auto')" title="Auto (System)"><i class="fas fa-circle-half-stroke"></i></button>
+            </div>
+        </div>
+
+        <div class="header">
+            <div>
+                <h1><strong>Josh Nichols</strong> <span>Full Stack Web Developer</span></h1>
+
+                <ul class="contact-list">
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:4802179308">(480) 217-9308</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:joshnichols@gmail.com">joshnichols@gmail.com</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-globe"></i>
+                        <a href="https://joshnichols.dev">joshnichols.dev</a>
+                    </li>
+                    <li>
+                        <i class="fab fa-linkedin"></i>
+                        <a href="http://www.linkedin.com/in/joshnicholsdev">linkedin.com/in/joshnicholsdev</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Based in AZ, USA</span>
+                    </li>
+                </ul>
+
+
+                <div class="summary">
+                    <h2>Summary</h2>
+                    <p>For over 20 years I've been building custom websites, solving technical challenges through code. What drives me is taking a functional requirement or design concept and translating it into a dynamic, working solution. NOTE: use AI to generate this after making the others sections, make it summarize my employment/education/skills into three objectives.</p>
+                </div>
+            </div>
+            <div>
+                <img src="joshnichols-headshot.png">
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section section-employment">
+                <h2>Employment</h2>
+
+                <div class="card">
+                    <h3>Carenetic Digital, Senior Full Stack Web Developer, 2023–2025</h3>
+                    <ul>
+                        <li>Architected and led development of a multi-tenant WordPress platform enabling DSOs to efficiently manage networks of dental practice websites</li>
+                        <li>Engineered custom design system with configurable variables to generate unique, brand-compliant layouts across multiple sites while maintaining code efficiency</li>
+                        <li>Developed sophisticated custom post types and dynamic relational structures to automate content generation and improve site interconnectivity</li>
+                        <li>Streamlined site provisioning workflows, reducing new website deployment time and enabling scalable growth for expanding dental organizations</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Skyhook Internet Marketing, Senior Web Developer, 2021–2025</h3>
+                    <ul>
+                        <li>Served as technical lead on client projects for small to medium-sized businesses, overseeing project architecture and technical strategy</li>
+                        <li>Established development standards and workflows that improved team efficiency and code quality across multiple concurrent projects</li>
+                        <li>Maintained expertise in evolving WordPress ecosystem and modern web development practices to deliver competitive advantages to clients</li>
+                        <li>Mentored team members and contributed to agency-wide technical decision-making and best practices</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>The cloudCreative Agency, Full Stack Web Developer, 2018–2021</h3>
+                    <ul>
+                        <li>Delivered freelance web development solutions for marketing websites, working independently to meet client specifications and deadlines</li>
+                        <li>Collaborated with agency teams to translate marketing objectives into functional, user-focused website experiences</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Skyhook Interactive Marketing, WordPress Web Developer, 2007–2020</h3>
+                    <ul>
+                        <li>Contributed to project planning and technical scoping, translating design mockups into clean, maintainable code</li>
+                        <li>Built custom WordPress themes, templates, and functionality tailored to diverse client needs and industries</li>
+                        <li>Managed complete development lifecycle from initial build through quality assurance, bug remediation, and successful site launches</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section section-education-skills">
+                <h2>Skills</h2>
+
+                <div class="card">
+                    <p><strong>Languages:</strong> PHP, JavaScript, HTML, CSS, Java</p>
+                    <p><strong>Platforms & Frameworks:</strong> WordPress (Multisite, Custom Themes/Plugins), React, Node.js</p>
+                    <p><strong>Tools & Technologies:</strong> Git, MySQL, JetBrains IDEs, RESTful APIs, JSON, AI-Assisted Development</p>
+                    <p><strong>Systems:</strong> Windows Server Administration</p>
+                </div>
+
+                <h2>Education</h2>
+
+                <div class="card">
+                    <p><strong>University of Phoenix</strong> - Phoenix, Arizona – 2009<br>
+                        Bachelor of Science in Management.
+                    </p>
+                    <p><strong>Western Governors University</strong> – Salt Lake City, Utah – 2008<br>
+                    </p>
+                    <p><strong>Axia College</strong> – Phoenix, Arizona – 2006<br>
+                        Associate of Arts in General Studies.
+                    </p>
+                    <p><strong>Chandler-Gilbert Community College</strong> – Gilbert, AZ – 2005<br>
+                        Programming and general study classes.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <h2>Portfolio</h2>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/350x200" alt="Carenetic Platform – Multi-Tenant WordPress Solution">
+                    </div>
+                    <h3>Carenetic Platform – Multi-Tenant WordPress Solution</h3>
+                    <p>Engineered enterprise-grade WordPress Multisite theme featuring comprehensive design customization system and advanced content management controls. Architected scalable solution enabling rapid deployment of brand-consistent websites across multiple dental practice locations while maintaining centralized code management and reducing maintenance overhead.</p>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/350x200" alt="Titan/Sentry Component Library – Modular Theme Framework">
+                    </div>
+                    <h3>Titan/Sentry Component Library – Modular Theme Framework</h3>
+                    <p>Developed reusable component library and modular WordPress theme architecture to accelerate content page development. Created library of flexible, pre-built content blocks that reduced page-building time while ensuring design consistency and code quality across client projects.</p>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/350x200" alt="Model1 – Automotive Inventory Management System">
+                    </div>
+                    <h3>Model1 – Automotive Inventory Management System</h3>
+                    <p>Built robust data synchronization system handling large-scale vehicle inventory datasets with real-time updates. Implemented advanced filtering and search functionality enabling users to efficiently query complex inventory data across multiple parameters and attributes.</p>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/350x200" alt="Legacy Traditional Schools – Multi-Site Network Management">
+                    </div>
+                    <h3>Legacy Traditional Schools – Multi-Site Network Management</h3>
+                    <p>Maintained and enhanced large-scale network of educational institution websites utilizing shared codebase architecture. Ensured brand consistency and feature parity across multiple campus sites while optimizing performance and implementing institution-specific customizations.</p>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/350x200" alt="MD Helicopters – AI-Enhanced Interactive Mapping">
+                    </div>
+                    <h3>MD Helicopters – AI-Enhanced Interactive Mapping</h3>
+                    <p>Leveraged AI-assisted development to rapidly deliver dynamic, data-driven mapping solution with real-time synchronization. Implemented filterable location display system integrating external data sources to provide intuitive geographic visualization of global service centers.</p>
+                </div>
+                
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/350x200" alt="Red Mountain Weight Loss – Geolocation-Aware Marketing Platform">
+                    </div>
+                    <h3>Red Mountain Weight Loss – Geolocation-Aware Marketing Platform</h3>
+                    <p>Developed sophisticated location-based WordPress solution with dynamic content delivery and personalized user experiences. Implemented geolocation detection and automated content switching to display location-specific services, pricing, and features based on user proximity to clinic locations.</p>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-image">
+                        <img src="https://placehold.co/350x200" alt="100+ Small Business Marketing Sites – High-Volume Client Delivery">
+                    </div>
+                    <h3>100+ Small Business Marketing Sites – High-Volume Client Delivery</h3>
+                    <p>Delivered nearly 100 brochure-style websites for small to medium-sized businesses across diverse industries. Converted design mockups into pixel-perfect, responsive WordPress sites through efficient front-end development workflows. Maintained consistent quality standards and rapid turnaround times while managing full development lifecycle from design implementation through launch.</p>
+                </div>
+            </div>
+        
+        </div>
+
+        <script>
+            function setTheme(theme) {
+                document.body.classList.remove('light-mode', 'dark-mode');
+                
+                if (theme === 'light') {
+                    document.body.classList.add('light-mode');
+                } else if (theme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                }
+                // 'auto' removes both classes, allowing CSS media query to work
+            }
+
+            // Listen for system theme changes
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    // Update if currently in 'auto' mode
+                    // For simplicity in this demo, we'll just let the CSS handle it
+                });
+            }
+        </script>
+</body>
+</html>
